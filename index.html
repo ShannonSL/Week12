@@ -5,16 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" media="screen" href="main.css" />
+    <link rel="stylesheet" media="screen" href="css/main.css"/>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-
-   
+    <title>Document</title>
 </head>
 <body>
-   
-    
+   <main id="app">
+       <h4 class="welcome-message">{{ mainmessage }}</h4>
+        <ul>
+            <li v-for="video in videodata">
+                <button :data-movie="video.id" v-on:click="fetchMore" class="more-details">More Details....</button>
+                <A :href="video.vid_path" v-on:"loadMovie">
+                    <img :src="'images/' + video.vid_thumb" alt="">
+                </A>
+                <p>Put genre data here</p> <!--add a field to the DB (or subquery another table and plug data in-->
+            </li>
+        </ul>
 
+        <p class="instructions">
+            <i>Click on a poster to preview the movie!</i>
+        </p>
 
-    <script src="main.js"></script> 
+        <section class="hidden-movies" :class="{'show-movie' : showDetails }"> 
+            <h3 class="movie-title">  </h3>
+                <video :src="'video/' + videosource"></video>
+                <div class="movie-details">
+                    <p>{{ videodescription}}</p>
+                </div>
+          </section>
+          <div class="up-arrow">
+          <span v-on:click="scrollBackUp" :class="{'show-scroller': showDeatails}">^</span>
+          </div>
+
+   </main>
+        <script src="js/main.js"></script> 
 </body>
 </html>
